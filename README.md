@@ -10,3 +10,5 @@
 - `Lap`: Uložení mezičasu
 - `CA-CG, DP`: Segmenty displeje
 - `AN`: Anody displeje
+
+# Aktuální verze projektu 
