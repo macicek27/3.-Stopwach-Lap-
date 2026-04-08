@@ -10,5 +10,14 @@
 - `Lap`: Uložení mezičasu
 - `CA-CG, DP`: Segmenty displeje
 - `AN`: Anody displeje
-
+# Vivado temporary files
+*.jou
+*.log
+*.str
+.Xil/
+*.cache/
+*.hw/
+*.ip_user_files/
+*.runs/
+*.sim/
 # Aktuální verze projektu 
