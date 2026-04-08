@@ -1,7 +1,7 @@
 # 3.-Stopwach-Lap-
 
 # HL_cod
-  library IEEE;
+--library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 entity clock_top is
@@ -29,5 +29,5 @@ end clock_top;
 
 architecture Behavioral of clock_top is
 begin
-    -- Zde se v Labu 2 propojí jednotlivé komponenty (instancování)
-end Behavioral;
+   
+--end Behavioral;
