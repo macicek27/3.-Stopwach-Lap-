@@ -12,14 +12,14 @@
 - `AN`: Anody displeje
 
 # Aktuální verze projektu 
-'library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-
-entity Stopwatch is
-
-    Port ( clk : in STD_LOGIC;
-           rst : in STD_LOGIC;
-           ssb : in STD_LOGIC;
+- library IEEE;
+- use IEEE.STD_LOGIC_1164.ALL;
+-
+- entity Stopwatch is
+-
+-   Port ( clk : in STD_LOGIC;
+-           rst : in STD_LOGIC;
+-           ssb : in STD_LOGIC;
            lap : in STD_LOGIC;
            
            CA : out STD_LOGIC;
