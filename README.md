@@ -9,7 +9,7 @@ Projekt obsahuje funkci **Lap**, která umožní zmrazit zobrazený čas bez př
 
 
 ## Plánované vstupy a výstupy
-- `mclk`: Hlavní hodiny
+- `clk`: Hlavní hodiny
 - `rst`: Reset stopek
 - `ssb`: Start/Stop
 - `Lap`: Uložení mezičasu
