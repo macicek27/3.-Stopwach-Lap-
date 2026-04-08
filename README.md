@@ -3,6 +3,8 @@
 
 ## Architektura (Blokové schéma)
 
+https://app.diagrams.net/
+
 ## Plánované vstupy a výstupy
 - `clk`: Hlavní hodiny
 - `rst`: Reset stopek
