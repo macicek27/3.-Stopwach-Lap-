@@ -15,3 +15,20 @@
 - `BTNL`: Zobrazení mezičasu
 - `CA-CG, DP`: Segmenty displeje
 - `AN`: Anody displeje
+
+## Rozdělení práce na projektu (Digital Stopwatch)
+
+### Hrbáček
+* **`Stopwatch_top`** 
+* **`Clk_en`** 
+* **`Debounce`**
+* **Constraints file**
+
+### Hofman
+* **`Start&Stop`** 
+* **`lap`** 
+* **`view`** 
+
+### Chmela
+* **`time_dec`** 
+* **`display_driver`**
