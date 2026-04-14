@@ -14,7 +14,7 @@
 - `CA-CG, DP`: Segmenty displeje
 - `AN`: Anody displeje
 
-## Rozdělení práce na projektu (Digital Stopwatch)
+## Rozdělení práce na projektu 
 
 ### Hrbáček
 * Stopwatch_top
