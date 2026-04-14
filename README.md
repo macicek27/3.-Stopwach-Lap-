@@ -19,10 +19,10 @@
 ## Rozdělení práce na projektu (Digital Stopwatch)
 
 ### Hrbáček
-* **`Stopwatch_top`** 
-* **`Clk_en`** 
-* **`Debounce`**
-* **Constraints file**
+* Stopwatch_top
+* Github
+* Schéma
+* Constraints file
 
 ### Hofman
 * **`Start&Stop`** 
