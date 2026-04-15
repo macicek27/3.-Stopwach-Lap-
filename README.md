@@ -3,11 +3,12 @@
 ## projektu
 Tento projekt implementuje plně funkční digitální stopky. Stopky měří čas s přesností na setiny sekundy, umožňují pozastavení čítání, ukládání mezičasů (lap time) a jejich následné zobrazení na 7segmentovém displeji.
 
-## (Jak to funguje)
+## Jak to funguje
 
 Systém je rozdělen do několika logických bloků, které spolu komunikují uvnitř hlavního modulu (`Stopwatch_top`):
 
 ## Architektura (Blokové schéma)
+(schema1.png)
 
 ### 1. Zpracování vstupů a časování
 * **`Debounce` :** Mechanická tlačítka při stisku "kmitají". Tento blok tyto zákmity filtruje a propouští do systému pouze čisté logické signály.
