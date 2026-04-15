@@ -32,7 +32,7 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 * **`btnr`** : Pravé tlačítko (listování v paměti mezičasů).
 * **`btnl`** : Levé tlačítko (přepínání zobrazení mezi běžícím časem a pamětí).
 
-### 📤 Výstupy (Outputs)
+### Výstupy (Outputs)
 * **`seg`** : Řízení jednotlivých segmentů (A-G)
 * **`dp`** : Desetinná tečka
 * **`an`**
