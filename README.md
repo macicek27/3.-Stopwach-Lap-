@@ -2,7 +2,8 @@
 **Autor:** Hrbáček, Chmela, Hofman
 
 ## Architektura (Blokové schéma)
-<img width="1821" height="816" alt="image" src="https://github.com/user-attachments/assets/37ab008f-a502-4574-ba08-01c8fbdd513d" />
+<img width="1846" height="800" alt="image" src="https://github.com/user-attachments/assets/729ea8ec-8f66-4840-8d00-ce8b22682415" />
+
 
 ## Plánované vstupy a výstupy
 - `clk`: Hlavní hodiny
