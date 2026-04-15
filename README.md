@@ -8,7 +8,7 @@ Tento projekt implementuje plně funkční digitální stopky. Stopky měří č
 Systém je rozdělen do několika logických bloků, které spolu komunikují uvnitř hlavního modulu (`Stopwatch_top`):
 
 ## Architektura (Blokové schéma)
-![Schéma zapojení stopek](schema1.png)
+![Schéma zapojení stopek](Schema1.png)
 
 ### 1. Zpracování vstupů a časování
 * **`Debounce` :** Mechanická tlačítka při stisku "kmitají". Tento blok tyto zákmity filtruje a propouští do systému pouze čisté logické signály.
