@@ -7,6 +7,8 @@ Tento projekt implementuje plně funkční digitální stopky. Stopky měří č
 
 Systém je rozdělen do několika logických bloků, které spolu komunikují uvnitř hlavního modulu (`Stopwatch_top`):
 
+## Architektura (Blokové schéma)
+
 ### 1. Zpracování vstupů a časování
 * **`Debounce` :** Mechanická tlačítka při stisku "kmitají". Tento blok tyto zákmity filtruje a propouští do systému pouze čisté logické signály.
 * **`Clk_en` :** Bere hlavní hodiny z desky a generuje povolovací pulz přesně každých 10 ms (frekvence 100 Hz). 
@@ -20,12 +22,6 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 * **`view`:** Na základě vstupu od uživatele propouští dál buď živý čas z čítače, nebo zmrazený čas z modulu `lap`.
 * **`time_dec`:** Přijímá 19bitové binární číslo a matematicky ho převádí na minuty, sekundy a setiny .
 * **`display_driver`** :**Rychle přepíná aktivní cifry na desce tak, že pro lidské oko svítí všech 6 číslic najednou.
-
-
-## Architektura (Blokové schéma)
-
-
-
 
 **Vstupy (Inputs):**
 * `clk` (1 bit): Hlavní hodinový signál.
