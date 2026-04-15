@@ -1,4 +1,4 @@
-# Projekt 3: Digitální stopky (Lap)
+# Projekt 3: Digitální stopky 
 **Autor:** Hrbáček, Chmela, Hofman
 ## projektu
 Tento projekt implementuje plně funkční digitální stopky. Stopky měří čas s přesností na setiny sekundy, umožňují pozastavení čítání, ukládání mezičasů (lap time) a jejich následné zobrazení na 7segmentovém displeji.
