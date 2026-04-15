@@ -19,7 +19,7 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 * **`lap` :** Registr, který na povel tlačítka zkopíruje aktuální 19bitovou hodnotu z čítače a uloží si ji k pozdějšímu zobrazení.
 * **`view`:** Na základě vstupu od uživatele propouští dál buď živý čas z čítače, nebo zmrazený čas z modulu `lap`.
 * **`time_dec`:** Přijímá 19bitové binární číslo a matematicky ho převádí na minuty, sekundy a setiny .
-* **`display_driver` :**Rychle přepíná aktivní cifry na desce tak, že pro lidské oko svítí všech 6 číslic najednou.
+* **`display_driver`** :**Rychle přepíná aktivní cifry na desce tak, že pro lidské oko svítí všech 6 číslic najednou.
 
 
 ## Architektura (Blokové schéma)
