@@ -5,7 +5,7 @@ Tento projekt implementuje plně funkční digitální stopky. Stopky měří č
 
 ## Jak to funguje
 
-Systém je rozdělen do několika logických bloků, které spolu komunikují uvnitř hlavního modulu (`Stopwatch_top`):
+Systém je rozdělen do několika logických bloků, které spolu komunikují uvnitř hlavního modulu
 
 ## Architektura (Blokové schéma)
 ![Schéma zapojení stopek](Schema1.png)
