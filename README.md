@@ -7,7 +7,7 @@
 
 ## Plánované vstupy a výstupy
 - `clk`: Hlavní hodiny
-- `BTND`: Reset stopek
+- `rst`: Reset stopek
 - `BTNU`: Start/Stop
 - `BTNC`: Uložení mezičasu
 - `BTNR`: Listování v mezičasech
