@@ -15,7 +15,7 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 * **`Clk_en` :** Bere hlavní hodiny z desky a generuje povolovací pulz přesně každých 10 ms (frekvence 100 Hz). 
 
 ### 2. Řízení a počítání času
-* **`Start&Stop`:** Vnitřní paměť, která uchovává stav stopek (běží/stojí). 
+* **`Start_Stop`:** Vnitřní paměť, která uchovává stav stopek (běží/stojí). 
 * **`Counter` :** Pokaždé, když dostane povel ze `Start&Stop`, přičte hodnotu 1. Jeho maximální kapacita umožňuje stopkám běžet zhruba 87 minut do přetečení.
 
 ### 3. Zpracování mezičasů a zobrazení
@@ -25,11 +25,17 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 * **`display_driver`** :**Rychle přepíná aktivní cifry na desce tak, že pro lidské oko svítí všech 6 číslic najednou.
 
 **Vstupy (Inputs):**
-* `clk` (1 bit): Hlavní hodinový signál.
-* `rst` (1 bit): Globální reset (okamžitě vrátí zobrazení na běžící čas).
-* `view_in` (1 bit): Řídicí signál (pulz) z odrušeného levého tlačítka (`btnl`).
-* `time_d` (19 bitů): Sběrnice nesoucí aktuální běžící čas z modulu `counter`.
-* `lap_d` (19 bitů): Sběrnice nesoucí "zmrazený" čas z modulu `lap_memory`.
+* **`clk`** : Hlavní hodinový signál z desky .
+* **`btnd`** : Globální reset pro vynulování celého systému .
+* **`btnu`** : Tlačítko nahoru (spuštění a pozastavení stopek).
+* **`btnc`** : Prostřední tlačítko (uložení aktuálního času do paměti).
+* **`btnr`** : Pravé tlačítko (listování v paměti mezičasů).
+* **`btnl`** : Levé tlačítko (přepínání zobrazení mezi běžícím časem a pamětí).
+
+### 📤 Výstupy (Outputs)
+* **`seg`** : Řízení jednotlivých segmentů (A-G)
+* **`dp`** : Desetinná tečka
+* **`an`**
 
 ## Rozdělení práce na projektu 
 
