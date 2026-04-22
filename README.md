@@ -1,4 +1,3 @@
-git lfs install
 # Projekt 3: Digitální stopky 
 **Autor:** Hrbáček, Chmela, Hofman
 ## projektu
