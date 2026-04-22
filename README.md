@@ -52,6 +52,13 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 * time_dec 
 * display_driver
 
+## Použité nástroje
+* Google Geminy
+* Vivado 2025.2
+* ChatGPT
+* draw.io
+* Microsoft Powerpoint
+
 
 
 
