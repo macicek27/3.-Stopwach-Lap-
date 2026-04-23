@@ -16,7 +16,7 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 
 ### 2. Řízení a počítání času
 * **`Start_Stop`:** Vnitřní paměť, která uchovává stav stopek (běží/stojí). 
-* **`Counter` :** Pokaždé, když dostane povel ze `Start&Stop`, přičte hodnotu 1. Jeho maximální kapacita umožňuje stopkám běžet zhruba 87 minut do přetečení.
+* **`Counter` :** Pokaždé, když dostane povel ze `Start&Stop`, přičte hodnotu 1. 
 
 ### 3. Zpracování mezičasů a zobrazení
 * **`lap` :** Registr, který na povel tlačítka zkopíruje aktuální 19bitovou hodnotu z čítače a uloží si ji k pozdějšímu zobrazení.
