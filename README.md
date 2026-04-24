@@ -1,30 +1,31 @@
-# Projekt 3: Digitální stopky 
-**Autor:** Hrbáček, Chmela, Hofman
-## projektu
+# Projekt 3: Digitální stopky
+**Autoři:** Hrbáček, Chmela, Hofman
+
+## Popis projektu
 Tento projekt implementuje plně funkční digitální stopky. Stopky měří čas s přesností na setiny sekundy, umožňují pozastavení čítání, ukládání mezičasů (lap time) a jejich následné zobrazení na 7segmentovém displeji.
 
 ## Jak to funguje
-
-Systém je rozdělen do několika logických bloků, které spolu komunikují uvnitř hlavního modulu
+Systém je rozdělen do několika logických bloků, které spolu komunikují uvnitř hlavního modulu.
 
 ## Architektura (Blokové schéma)
 ![Schéma zapojení stopek](Schema2.png)
 
-**Vstupy (Inputs):**
-* **`clk`** : Hlavní hodinový signál z desky .
-* **`btnd`** : Globální reset pro vynulování celého systému .
-* **`btnu`** : Tlačítko nahoru (spuštění a pozastavení stopek).
-* **`btnc`** : Prostřední tlačítko (uložení aktuálního času do paměti).
-* **`btnr`** : Pravé tlačítko (listování v paměti mezičasů).
-* **`btnl`** : Levé tlačítko (přepínání zobrazení mezi běžícím časem a pamětí).
+### Vstupy (Inputs)
+* **`clk`**: Hlavní hodinový signál z desky.
+* **`btnd`**: Globální reset pro vynulování celého systému.
+* **`btnu`**: Tlačítko nahoru (spuštění a pozastavení stopek).
+* **`btnc`**: Prostřední tlačítko (uložení aktuálního času do paměti).
+* **`btnr`**: Pravé tlačítko (listování v paměti mezičasů).
+* **`btnl`**: Levé tlačítko (přepínání zobrazení mezi běžícím časem a pamětí).
 
 ### Výstupy (Outputs)
-* **`seg`** : Řízení jednotlivých segmentů (A-G)
-* **`dp`** : Desetinná tečka
-* **`an`**
+* **`seg`**: Řízení jednotlivých segmentů (A-G).
+* **`dp`**: Desetinná tečka.
+* **`an`**: Řízení anod (výběr aktivní číslice na displeji).
 
-# Dokumentace modulů stopek (Stopwatch)
+---
 
+## Dokumentace modulů stopek (Stopwatch)
 Tato sekce popisuje jednotlivé moduly projektu podle blokového schématu a ověřené simulace.
 
 ### **Stopwach_top** (Hlavní modul stopek)
@@ -72,28 +73,41 @@ Modul zodpovědný za fyzické zobrazení čísel na 7-segmentovém displeji vý
 * Přebírá 24bitová data (`sig_data`) a plynule s nimi multiplexuje displej.
 * Signály pro anody `an[7:0]` a katody segmentů `seg[6:0]` v simulaci neustále střídají hodnoty, což potvrzuje nepřetržité a správné přepínání číslic.
 
-## Rozdělení práce na projektu 
+---
 
+## Výsledky simulace hlavního modulu
+Následující obrázek ukazuje kompletní ověření funkce stopek. Ukazuje správnou reakci na stisk tlačítek, chod čítače, uložení mezičasu a jeho propuštění na displej.
+
+![Výsledek simulace hlavního modulu](simulace.png)
+
+**Popis průběhu simulace podle grafu:**
+* **Spuštění stopek (cca 10–40 ms):** Tlačítko `btnu` je stisknuto dostatečně dlouho, takže debouncer vygeneruje po zpoždění pulz na `sig_ss`. Tím se trvale zapne signál `sig_coun_en` a čítač (`sig_lap_in`) začne počítat nahoru (`00001`, `00002` atd.).
+* **Uložení mezičasu (cca 60–85 ms):** Zmáčknuto tlačítko `btnc`. Debouncer propustí signál a vygeneruje pulz na `sig_lap_save`. Přesně v tento moment se hodnota z čítače úspěšně zapíše do paměti lap.
+* **Zobrazení mezičasu na displeji (od 115 ms dál):** Zmáčknuto tlačítko `btnl` (View). Hodnota pro displej (`sig_view_out`) se "zmrazí" na uloženém mezičase, zatímco interní čítač (`sig_lap_in`) na pozadí dál nerušeně počítá a zvyšuje se (`0000a`, `0000b`).
+
+---
+
+## Rozdělení práce na projektu 
 ### Hrbáček
-* Stopwatch_top
-* Github
-* Schéma
-* view
+* `Stopwatch_top` (hlavní modul)
+* Správa GitHub repozitáře
+* Blokové schéma projektu
+* Modul `view`
+
 ### Hofman
-* Start&Stop 
-* lap 
-* Constraints file
+* Modul `Start_Stop`
+* Modul `lap`
+* Vytvoření a mapování Constraints filu
+
 ### Chmela
-* time_dec 
-* display_driver
+* Modul `time_dec`
+* Modul `display_driver`
+
+---
 
 ## Použité nástroje
-* Google Geminy
-* Vivado 2025.2
+* Google Gemini
 * ChatGPT
+* Vivado 2025.2
 * draw.io
-* Microsoft Powerpoint
-
-
-
-
+* Microsoft PowerPoint
