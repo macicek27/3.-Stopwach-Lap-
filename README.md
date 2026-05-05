@@ -67,9 +67,13 @@ Modul, který udržuje informaci o tom, zda stopky momentálně běží, nebo st
 * Při detekci platného stisku tlačítka Start/Stop (krátký pulz ze signálu `sig_ss` v čase cca 135 ms) trvale přepne stav výstupního signálu `sig_coun_en` na logickou `1`, čímž povolí čítání. 
 
 ### **lap** (Paměť mezičasu)
-Modul sloužící k uložení aktuálního stavu čítače při požadavku na mezičas. 
-* Při příchodu pulzu na vstup `lap_sv` (`sig_lap_save` v čase cca 85 ms) okamžitě zapíše na svůj výstup aktuální hodnotu z vnitřního čítače (např. `00006`).
-* Tuto hodnotu trvale drží na svém výstupu `lap_out`, dokud nepřijde signál pro reset paměti (`lap_sr`) nebo požadavek na nový mezičas.
+![Simulace lap Modulu](cesta/k/tvemu/obrazku.png)
+* **0 – 20 ns (`rst`):** Na začátku je aktivní signál `rst`, který paměť resetuje.
+* **Zápis do paměti (`lap_sv`):** * Kolem času **50 ns** je na vstupu `lap_in` hodnota `00032` (dekadicky 50). Přichází první pulz `lap_sv` a hodnota se ukládá. Výstup `lap_out` rovnou ukazuje tento první uložený čas. V čase **110 ns** a **170 ns** se na vstup přivádí další časy (`00096` a `0012c`)
+* **Listování v paměti (`lap_sr`):**
+  * Od času **270 ns** přicházejí pulzy na signál `lap_sr` (čtení/rotace). 
+  * S prvním pulzem se výstup `lap_out` změní na druhý uložený čas `00096`.
+  * S druhým pulzem (330 ns) naskočí třetí uložený čas `0012c`.
 
 ### **view** (Multiplexer zobrazení)
 Inteligentní přepínač, který rozhoduje, jaký čas se pošle uživateli na displej.
