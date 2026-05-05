@@ -62,9 +62,13 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 
 
 ### **Start_Stop** (Klopný obvod chodu)
-Modul, který udržuje informaci o tom, zda stopky momentálně běží, nebo stojí.
-* Funguje na principu T-klopného obvodu (Toggle). Výchozí stav výstupu `en` (enable) je `0` (stopky stojí).
-* Při detekci platného stisku tlačítka Start/Stop (krátký pulz ze signálu `sig_ss` v čase cca 135 ms) trvale přepne stav výstupního signálu `sig_coun_en` na logickou `1`, čímž povolí čítání. 
+![Simulace modulu Start_Stop](cesta/k/tvemu/obrazku_startstop.png)
+
+* **0 – 25 ns (`rst`):** Na začátku je aktivní reset, který modul bezpečně inicializuje do vypnutého stavu. Povolovací pulzy na vstupu `ce` (např. ve 40 ns) se na výstup `en` nedostanou.
+* **Kolem 55 ns (START):** Přichází první krátký pulz na vstup `btn_in`, což simuluje stisk tlačítka. Obvod se vnitřně překlopí do stavu "běží".
+* **90 ns – 200 ns (Běh stopek):** Je jasně vidět, že výstupní signál `en` nyní přesně kopíruje vstupní povolovací pulzy `ce`. V tomto stavu by stopky čítaly čas.
+* **Kolem 205 ns (STOP):** Přichází druhý stisk tlačítka `btn_in`. Obvod se překlápí zpět do stavu "zastaveno".
+* **Od 210 ns dále (Zastavené stopky):** Výstup `en` trvale zůstává na logické `0`. Přestože vstupní signál `ce` nadále pravidelně pulzuje modul tyto pulzy blokuje, čímž zastaví čítání stopek.
 
 ### **lap** (Paměť mezičasu)
 ![Simulace lap Modulu](cesta/k/tvemu/obrazku.png)
@@ -76,25 +80,37 @@ Modul, který udržuje informaci o tom, zda stopky momentálně běží, nebo st
   * S druhým pulzem (330 ns) naskočí třetí uložený čas `0012c`.
 
 ### **view** (Multiplexer zobrazení)
-Inteligentní přepínač, který rozhoduje, jaký čas se pošle uživateli na displej.
-* **Normální běh:** Když je signál `sig_view` na úrovni `0`, modul propouští aktuální běžící čas přímo z čítače.
-* **Režim mezičasu:** Při stisku tlačítka View (aktivace `sig_view` od času cca 115 ms) modul přepne vstup. Na výstup `sig_view_out` pošle "zmrazenou" hodnotu z paměti lap (`00006`), i když čítač na pozadí dál roste (`0000a`, `0000b`).
+![Simulace modulu view](cesta/k/tvemu/obrazku_view.png)
+
+* **0 – 25 ns (`rst`):** Systém se po resetu nastaví do výchozího stavu.
+* **25 ns – 130 ns (Výchozí režim):** Na vstupu `time_d` je vidět, jak se hodnoty simulovaně mění. Výstup `view_out` tyto hodnoty okamžitě a přesně kopíruje. Modul tedy správně posílá běžící čas dál do obvodu.
+* **Kolem 130 ns (První stisk tlačítka):** Přichází pulz na signál `view_in`, čímž dáváme obvodu povel k zobrazení paměti.
+* **130 ns – 270 ns (Režim zobrazení paměti):** Výstup `view_out` se po hraně hodin přepne a začne propouštět hodnoty ze vstupu `lap_d`. Kolem času 220 ns je také otestováno, že pokud se hodnota v paměti změní, modul ji správně a plynule propustí na výstup. Běžící čas na `time_d` na pozadí dál neustále běží, ale na výstup se nyní nedostane.
+* **Kolem 270 ns (Druhý stisk tlačítka):** Další pulz na `view_in` dává povel k návratu na normální zobrazení.
 
 ### **time_dec** (Dekodér času)
-Modul pro přepočet hrubé binární hodnoty pro potřeby displeje.
-* Na vstup `time_in` přijímá aktuální 19bitová data z multiplexeru (např. hodnotu `00006` ze `sig_view_out`).
-* Na 24bitovém výstupu `time_out` (`sig_data`) ji rozdělí na šest samostatných 4bitových číslic ve formátu BCD (na ukázce hodnota `000006`).
+![Simulace modulu time_dec](cesta/k/tvemu/obrazku_timedec.png)
+
+* **0 ns:** Čas 0 se správně dekóduje jako `000000`.
+* **20 ns:** 99 setin (těsně před vteřinou) se přeloží jako `000099`.
+* **40 ns:** 100 setin se správně překlopí na 1 vteřinu a nula setin: `000100`.
+* **60 ns:** 5999 setin (těsně před minutou) dává `005999`.
+* **80 ns:** 6000 setin se překlopí na přesně 1 minutu: `010000`.
+* **100 ns:** Náhodný čas (75456 setin) se ukáže jako 12 minut, 34 sekund a 56 setin: `123456`.
+* **120 ns:** Maximální zobrazitelný čas (359999 setin) se dekóduje jako `595999`.
 
 ### **display_driver** (Řadič sedmisegmentového displeje)
-Modul zodpovědný za fyzické zobrazení čísel na 7-segmentovém displeji vývojové desky.
-* Přebírá 24bitová data (`sig_data`) a plynule s nimi multiplexuje displej.
-* Signály pro anody `an[7:0]` a katody segmentů `seg[6:0]` v simulaci neustále střídají hodnoty, což potvrzuje nepřetržité a správné přepínání číslic
+![Simulace modulu display_driver](cesta/k/tvemu/obrazku_driver.png)
 
-### **debounce** (Odrušení tlačítek)
+* **Základní rotace (0–14 ms):** Signál `an` neustále a pravidelně rotuje hexadecimální hodnoty `3e`, `3d`, `3b`, `37`, `2f` a `1f`. To znamená, že je vždy na jednom pinu logická nula (tzv. "chodící nula"), čímž se cyklicky aktivuje vždy pouze jeden ze šesti displejů.
+* **Časování:** Přepnutí na další anodu probíhá přesně každou 1 milisekundu.
+* **Zobrazení hodnoty 123456 (0–8 ms):** Na vstupu jsou data `123456`. Výstup `seg` na to reaguje tak, že synchronně s rotací anód posílá na displej kódy pro příslušné číslice z této hodnoty.
+* **Změna zobrazení (8 ms):** Vstupní data se skokově změní na hodnotu `987650`. Ovladač na signálu `an` plynule pokračuje v rotaci bez přerušení, ale na výstupu `seg` okamžitě začne generovat nové kódy odpovídající tomuto novému času.
 
-### **clk_en** (Generátor hodinového povolení)
-
-### **counter** (Hlavní čítač)
+### *** 
+**debounce** (Odrušení tlačítek)
+**clk_en** (Generátor hodinového povolení)
+**counter** (Hlavní čítač)
 
 ## Rozdělení práce na projektu 
 ### Hrbáček
