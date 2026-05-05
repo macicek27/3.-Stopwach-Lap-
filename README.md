@@ -107,10 +107,10 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 * **Zobrazení hodnoty 123456 (0–8 ms):** Na vstupu jsou data `123456`. Výstup `seg` na to reaguje tak, že synchronně s rotací anód posílá na displej kódy pro příslušné číslice z této hodnoty.
 * **Změna zobrazení (8 ms):** Vstupní data se skokově změní na hodnotu `987650`. Ovladač na signálu `an` plynule pokračuje v rotaci bez přerušení, ale na výstupu `seg` okamžitě začne generovat nové kódy odpovídající tomuto novému času.
 
-### *** 
-**debounce** (Odrušení tlačítek)
-**clk_en** (Generátor hodinového povolení)
-**counter** (Hlavní čítač)
+### *** Programy od Tomas Fryza
+* **debounce** (Odrušení tlačítek)
+* **clk_en** (Generátor hodinového povolení)
+* **counter** (Hlavní čítač)
 
 ## Rozdělení práce na projektu 
 ### Hrbáček
