@@ -50,29 +50,21 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 ## Dokumentace modulů stopek (Stopwatch)
 
 ### **Stopwach_top** (Hlavní modul stopek)
-Top-level modul, který propojuje veškerou vnitřní logiku stopek (odrušení tlačítek, počítání, paměť, multiplexování zobrazení a řízení displeje) do jednoho celku.
-* Integruje 5 tlačítek na vstupu a převádí je na řídicí signály pomocí modulů `debounce`.
-* Směruje zpracovaná data (`sig_data`) do modulu `display_driver`, který fyzicky řídí anody (`an[7:0]`) a katody (`seg[6:0]`) sedmisegmentového displeje.
 
-### **debounce** (Odrušení tlačítek)
-Modul zabraňující nežádoucím zákmitům mechanických tlačítek. Simulace ověřuje tyto testovací případy:
-* **Ignorování šumu:** Krátký stisk tlačítka (do 10 ms) modul správně vyhodnotí jako šum a řídicí pulz nevygeneruje.
-* **Platný stisk:** Dlouhý stisk tlačítka (např. `btnc` okolo 60–85 ms) je bezpečně propuštěn a na výstupu se vygeneruje korektní jednoclockový pulz (např. `sig_lap_save`).
+![Simulace Top Modulu](cesta/k/tvemu/obrazku.png)
 
-### **clk_en** (Generátor hodinového povolení)
-Dělička frekvence, která zpomaluje hlavní hodiny desky na požadovanou frekvenci pro logiku stopek.
-* Na výstupu generuje pravidelné pulzy signálu `sig_clk_en`.
-* Pomocí těchto pulzů se synchronizuje a "krokuje" hlavní čítač a další řídicí moduly, čímž je zaručeno přesné odměřování času.
+* **0 – 10 ms (`btnd`):** Globální reset celého systému.
+* **20 – 40 ms (`btnu`):** Start stopek (aktivace čítání).
+* **60 – 80 ms a 90 – 110 ms (`btnc`):** Uložení prvního a následně druhého mezičasu do paměti během nepřerušeného běhu stopek.
+* **120 – 140 ms (`btnl`):** Přepnutí zobrazení displeje z běžícího času na režim prohlížení paměti.
+* **140 – 160 ms (`btnr`):** Listování mezi uloženými časy uvnitř paměti.
+* **180 – 200 ms (`btnl`):** Opětovné stisknutí tlačítka a návrat zobrazení zpět na aktuální běžící čas.
+
 
 ### **Start_Stop** (Klopný obvod chodu)
 Modul, který udržuje informaci o tom, zda stopky momentálně běží, nebo stojí.
 * Funguje na principu T-klopného obvodu (Toggle). Výchozí stav výstupu `en` (enable) je `0` (stopky stojí).
 * Při detekci platného stisku tlačítka Start/Stop (krátký pulz ze signálu `sig_ss` v čase cca 135 ms) trvale přepne stav výstupního signálu `sig_coun_en` na logickou `1`, čímž povolí čítání. 
-
-### **counter** (Hlavní čítač)
-Jádro stopek, které se stará o samotné odměřování času.
-* Je aktivní pouze ve chvíli, kdy je jeho vstupní signál `en` (připojený na `sig_coun_en`) v logické `1` a dorazí pulz od `clk_en`.
-* V simulaci je vidět, že po aktivaci povolovacího signálu začne postupně inkrementovat svou 19bitovou hodnotu (`00001`, `00002`, `00003`...) a odesílá ji na výstup `cnt` (zapojen na `sig_lap_in`).
 
 ### **lap** (Paměť mezičasu)
 Modul sloužící k uložení aktuálního stavu čítače při požadavku na mezičas. 
@@ -92,21 +84,13 @@ Modul pro přepočet hrubé binární hodnoty pro potřeby displeje.
 ### **display_driver** (Řadič sedmisegmentového displeje)
 Modul zodpovědný za fyzické zobrazení čísel na 7-segmentovém displeji vývojové desky.
 * Přebírá 24bitová data (`sig_data`) a plynule s nimi multiplexuje displej.
-* Signály pro anody `an[7:0]` a katody segmentů `seg[6:0]` v simulaci neustále střídají hodnoty, což potvrzuje nepřetržité a správné přepínání číslic.
+* Signály pro anody `an[7:0]` a katody segmentů `seg[6:0]` v simulaci neustále střídají hodnoty, což potvrzuje nepřetržité a správné přepínání číslic
 
----
+### **debounce** (Odrušení tlačítek)
 
-## Výsledky simulace hlavního modulu
-Následující obrázek ukazuje kompletní ověření funkce stopek. Ukazuje správnou reakci na stisk tlačítek, chod čítače, uložení mezičasu a jeho propuštění na displej.
+### **clk_en** (Generátor hodinového povolení)
 
-![Výsledek simulace hlavního modulu](simulace.png)
-
-**Popis průběhu simulace podle grafu:**
-* **Spuštění stopek (cca 10–40 ms):** Tlačítko `btnu` je stisknuto dostatečně dlouho, takže debouncer vygeneruje po zpoždění pulz na `sig_ss`. Tím se trvale zapne signál `sig_coun_en` a čítač (`sig_lap_in`) začne počítat nahoru (`00001`, `00002` atd.).
-* **Uložení mezičasu (cca 60–85 ms):** Zmáčknuto tlačítko `btnc`. Debouncer propustí signál a vygeneruje pulz na `sig_lap_save`. Přesně v tento moment se hodnota z čítače úspěšně zapíše do paměti lap.
-* **Zobrazení mezičasu na displeji (od 115 ms dál):** Zmáčknuto tlačítko `btnl` (View). Hodnota pro displej (`sig_view_out`) se "zmrazí" na uloženém mezičase, zatímco interní čítač (`sig_lap_in`) na pozadí dál nerušeně počítá a zvyšuje se (`0000a`, `0000b`).
-
----
+### **counter** (Hlavní čítač)
 
 ## Rozdělení práce na projektu 
 ### Hrbáček
