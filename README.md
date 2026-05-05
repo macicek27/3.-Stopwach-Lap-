@@ -48,7 +48,6 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 ---
 
 ## Dokumentace modulů stopek (Stopwatch)
-Tato sekce popisuje jednotlivé moduly projektu podle blokového schématu a ověřené simulace.
 
 ### **Stopwach_top** (Hlavní modul stopek)
 Top-level modul, který propojuje veškerou vnitřní logiku stopek (odrušení tlačítek, počítání, paměť, multiplexování zobrazení a řízení displeje) do jednoho celku.
