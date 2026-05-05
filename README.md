@@ -11,17 +11,33 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 ![Schéma zapojení stopek](Schema2.png)
 
 ### Vstupy (Inputs)
-* **`clk`**: Hlavní hodinový signál z desky.
-* **`btnd`**: Globální reset pro vynulování celého systému.
-* **`btnu`**: Tlačítko nahoru (spuštění a pozastavení stopek).
-* **`btnc`**: Prostřední tlačítko (uložení aktuálního času do paměti).
-* **`btnr`**: Pravé tlačítko (listování v paměti mezičasů).
-* **`btnl`**: Levé tlačítko (přepínání zobrazení mezi běžícím časem a pamětí).
+* **`clk`** (1-bit): Hlavní hodinový signál z desky.
+* **`btnd`** (1-bit): Globální reset pro vynulování celého systému.
+* **`btnu`** (1-bit): Tlačítko nahoru (spuštění a pozastavení stopek).
+* **`btnc`** (1-bit): Prostřední tlačítko (uložení aktuálního času do paměti).
+* **`btnr`** (1-bit): Pravé tlačítko (listování v paměti mezičasů).
+* **`btnl`** (1-bit): Levé tlačítko (přepínání zobrazení mezi běžícím časem a pamětí).
 
 ### Výstupy (Outputs)
-* **`seg`**: Řízení jednotlivých segmentů (A-G).
-* **`dp`**: Desetinná tečka.
-* **`an`**: Řízení anod (výběr aktivní číslice na displeji).
+* **`seg`** (7-bit, `[6:0]`): Řízení jednotlivých segmentů (A-G).
+* **`dp`** (1-bit): Desetinná tečka.
+* **`an`** (8-bit, `[7:0]`): Řízení anod (výběr aktivní číslice na displeji).
+
+### Vnitřní signály (Internal Signals)
+
+| Název signálu | Velikost |
+| :--- | :--- |
+| **`sig_clk_en`** | 1-bit |
+| **`sig_ss`** | 1-bit |
+| **`sig_lap_save`** | 1-bit |
+| **`sig_lap_sr`** | 1-bit |
+| **`sig_view`** | 1-bit |
+| **`sig_coun_en`** | 1-bit |
+| **`sig_lap_in`** | 19-bit `(18 downto 0)` |
+| **`sig_lap_out`** | 19-bit `(18 downto 0)` |
+| **`sig_view_out`** | 19-bit `(18 downto 0)` |
+| **`sig_data`** | 24-bit `(23 downto 0)` |
+| **`sig_an_5_0`** | 6-bit `(5 downto 0)` |
 
 ---
 
