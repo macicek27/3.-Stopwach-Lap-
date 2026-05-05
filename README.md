@@ -51,7 +51,7 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 
 ### **Stopwach_top** (Hlavní modul stopek)
 
-![Simulace Top Modulu](cesta/k/tvemu/obrazku.png)
+![Simulace Top Modulu](tb_Stopwatch.png)
 
 * **0 – 10 ms (`btnd`):** Globální reset celého systému.
 * **20 – 40 ms (`btnu`):** Start stopek (aktivace čítání).
@@ -62,7 +62,7 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 
 
 ### **Start_Stop** (Klopný obvod chodu)
-![Simulace modulu Start_Stop](cesta/k/tvemu/obrazku_startstop.png)
+![Simulace modulu Start_Stop](tb_Start_Stop.png)
 
 * **0 – 25 ns (`rst`):** Na začátku je aktivní reset, který modul bezpečně inicializuje do vypnutého stavu. Povolovací pulzy na vstupu `ce` (např. ve 40 ns) se na výstup `en` nedostanou.
 * **Kolem 55 ns (START):** Přichází první krátký pulz na vstup `btn_in`, což simuluje stisk tlačítka. Obvod se vnitřně překlopí do stavu "běží".
@@ -71,7 +71,7 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 * **Od 210 ns dále (Zastavené stopky):** Výstup `en` trvale zůstává na logické `0`. Přestože vstupní signál `ce` nadále pravidelně pulzuje modul tyto pulzy blokuje, čímž zastaví čítání stopek.
 
 ### **lap** (Paměť mezičasu)
-![Simulace lap Modulu](cesta/k/tvemu/obrazku.png)
+![Simulace lap Modulu](tb_lap.png)
 * **0 – 20 ns (`rst`):** Na začátku je aktivní signál `rst`, který paměť resetuje.
 * **Zápis do paměti (`lap_sv`):** * Kolem času **50 ns** je na vstupu `lap_in` hodnota `00032` (dekadicky 50). Přichází první pulz `lap_sv` a hodnota se ukládá. Výstup `lap_out` rovnou ukazuje tento první uložený čas. V čase **110 ns** a **170 ns** se na vstup přivádí další časy (`00096` a `0012c`)
 * **Listování v paměti (`lap_sr`):**
@@ -80,7 +80,7 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
   * S druhým pulzem (330 ns) naskočí třetí uložený čas `0012c`.
 
 ### **view** (Multiplexer zobrazení)
-![Simulace modulu view](cesta/k/tvemu/obrazku_view.png)
+![Simulace modulu view](tb_view.png)
 
 * **0 – 25 ns (`rst`):** Systém se po resetu nastaví do výchozího stavu.
 * **25 ns – 130 ns (Výchozí režim):** Na vstupu `time_d` je vidět, jak se hodnoty simulovaně mění. Výstup `view_out` tyto hodnoty okamžitě a přesně kopíruje. Modul tedy správně posílá běžící čas dál do obvodu.
@@ -89,7 +89,7 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 * **Kolem 270 ns (Druhý stisk tlačítka):** Další pulz na `view_in` dává povel k návratu na normální zobrazení.
 
 ### **time_dec** (Dekodér času)
-![Simulace modulu time_dec](cesta/k/tvemu/obrazku_timedec.png)
+![Simulace modulu time_dec](tb_time_dec.png)
 
 * **0 ns:** Čas 0 se správně dekóduje jako `000000`.
 * **20 ns:** 99 setin (těsně před vteřinou) se přeloží jako `000099`.
@@ -100,14 +100,14 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 * **120 ns:** Maximální zobrazitelný čas (359999 setin) se dekóduje jako `595999`.
 
 ### **display_driver** (Řadič sedmisegmentového displeje)
-![Simulace modulu display_driver](cesta/k/tvemu/obrazku_driver.png)
+![Simulace modulu display_driver](tb_display_driver.png)
 
 * **Základní rotace (0–14 ms):** Signál `an` neustále a pravidelně rotuje hexadecimální hodnoty `3e`, `3d`, `3b`, `37`, `2f` a `1f`. To znamená, že je vždy na jednom pinu logická nula (tzv. "chodící nula"), čímž se cyklicky aktivuje vždy pouze jeden ze šesti displejů.
 * **Časování:** Přepnutí na další anodu probíhá přesně každou 1 milisekundu.
 * **Zobrazení hodnoty 123456 (0–8 ms):** Na vstupu jsou data `123456`. Výstup `seg` na to reaguje tak, že synchronně s rotací anód posílá na displej kódy pro příslušné číslice z této hodnoty.
 * **Změna zobrazení (8 ms):** Vstupní data se skokově změní na hodnotu `987650`. Ovladač na signálu `an` plynule pokračuje v rotaci bez přerušení, ale na výstupu `seg` okamžitě začne generovat nové kódy odpovídající tomuto novému času.
 
-### *** Programy od Tomas Fryza
+### *** Programy od doc. Ing. Tomáš Frýza, Ph.D. 
 * **debounce** (Odrušení tlačítek)
 * **clk_en** (Generátor hodinového povolení)
 * **counter** (Hlavní čítač)
