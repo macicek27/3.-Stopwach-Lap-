@@ -8,7 +8,7 @@ Tento projekt implementuje plně funkční digitální stopky. Stopky měří č
 Systém je rozdělen do několika logických bloků, které spolu komunikují uvnitř hlavního modulu.
 
 ## Architektura (Blokové schéma)
-![Schéma zapojení stopek](Schema2.png)
+![Schéma zapojení stopek](Schema3.png)
 
 ### Vstupy (Inputs)
 
