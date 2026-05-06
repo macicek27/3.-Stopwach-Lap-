@@ -49,7 +49,7 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 
 ## Dokumentace modulů stopek (Stopwatch)
 
-### **[Stopwach_top](edge_detector.vhd)** (Hlavní modul stopek)
+### **[Stopwach_top](Stopwach_top.vhd)** (Hlavní modul stopek)
 
 ![Simulace Top Modulu](tb_Stopwatch.png)
 
@@ -61,7 +61,7 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 * **180 – 200 ms (`btnl`):** Opětovné stisknutí tlačítka a návrat zobrazení zpět na aktuální běžící čas.
 
 
-### **[Start_Stop](edge_detector.vhd)** (Klopný obvod chodu)
+### **[Start_Stop](Start_Stop.vhd)** (Klopný obvod chodu)
 ![Simulace modulu Start_Stop](tb_Start_Stop.png)
 
 * **0 – 25 ns (`rst`):** Na začátku je aktivní reset, který modul bezpečně inicializuje do vypnutého stavu. Povolovací pulzy na vstupu `ce` (např. ve 40 ns) se na výstup `en` nedostanou.
@@ -70,7 +70,7 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 * **Kolem 205 ns (STOP):** Přichází druhý stisk tlačítka `btn_in`. Obvod se překlápí zpět do stavu "zastaveno".
 * **Od 210 ns dále (Zastavené stopky):** Výstup `en` trvale zůstává na logické `0`. Přestože vstupní signál `ce` nadále pravidelně pulzuje modul tyto pulzy blokuje, čímž zastaví čítání stopek.
 
-### **[lap](edge_detector.vhd)** (Paměť mezičasu)
+### **[lap](lap.vhd)** (Paměť mezičasu)
 ![Simulace lap Modulu](tb_lap.png)
 * **0 – 20 ns (`rst`):** Na začátku je aktivní signál `rst`, který paměť resetuje.
 * **Zápis do paměti (`lap_sv`):** * Kolem času **50 ns** je na vstupu `lap_in` hodnota `00032` (dekadicky 50). Přichází první pulz `lap_sv` a hodnota se ukládá. Výstup `lap_out` rovnou ukazuje tento první uložený čas. V čase **110 ns** a **170 ns** se na vstup přivádí další časy (`00096` a `0012c`)
@@ -79,7 +79,7 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
   * S prvním pulzem se výstup `lap_out` změní na druhý uložený čas `00096`.
   * S druhým pulzem (330 ns) naskočí třetí uložený čas `0012c`.
 
-### **[view](edge_detector.vhd)** (Multiplexer zobrazení)
+### **[view](view.vhd)** (Multiplexer zobrazení)
 ![Simulace modulu view](tb_view.png)
 
 * **0 – 25 ns (`rst`):** Systém se po resetu nastaví do výchozího stavu.
@@ -88,7 +88,7 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 * **130 ns – 270 ns (Režim zobrazení paměti):** Výstup `view_out` se po hraně hodin přepne a začne propouštět hodnoty ze vstupu `lap_d`. Kolem času 220 ns je také otestováno, že pokud se hodnota v paměti změní, modul ji správně a plynule propustí na výstup. Běžící čas na `time_d` na pozadí dál neustále běží, ale na výstup se nyní nedostane.
 * **Kolem 270 ns (Druhý stisk tlačítka):** Další pulz na `view_in` dává povel k návratu na normální zobrazení.
 
-### **[time_dec](edge_detector.vhd)** (Dekodér času)
+### **[time_dec](time_dec.vhd)** (Dekodér času)
 ![Simulace modulu time_dec](tb_time_dec.png)
 
 * **0 ns:** Čas 0 se správně dekóduje jako `000000`.
@@ -99,7 +99,7 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 * **100 ns:** Náhodný čas (75456 setin) se ukáže jako 12 minut, 34 sekund a 56 setin: `123456`.
 * **120 ns:** Maximální zobrazitelný čas (359999 setin) se dekóduje jako `595999`.
 
-### **[display_driver](edge_detector.vhd)** (Řadič sedmisegmentového displeje)
+### **[display_driver](display_driver.vhd)** (Řadič sedmisegmentového displeje)
 ![Simulace modulu display_driver](tb_display_driver.png)
 
 * **Základní rotace (0–14 ms):** Signál `an` neustále a pravidelně rotuje hexadecimální hodnoty `3e`, `3d`, `3b`, `37`, `2f` a `1f`. To znamená, že je vždy na jednom pinu logická nula (tzv. "chodící nula"), čímž se cyklicky aktivuje vždy pouze jeden ze šesti displejů.
