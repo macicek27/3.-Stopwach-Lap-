@@ -47,6 +47,8 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 | **`sig_data`** | 24-bit `[23:0]` | Dekódovaný čas připravený pro displej. |
 ---
 
+![ synthesis](post_synt.png)
+
 ## Dokumentace modulů stopek (Stopwatch)
 
 ### **[Stopwach_top](Stopwach_top/Stopwach_top.srcs/sim_1/new/tb_Stopwach_top.vhd)** (Hlavní modul stopek)
