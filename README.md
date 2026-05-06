@@ -112,7 +112,7 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 * **clk_en** (Generátor hodinového povolení)
 * **counter** (Hlavní čítač)
 
-<video src="img/IMG_1787.mov" controls></video>
+<video src="img/nazev_tveho_videa.mp4" width="800" controls></video>
 
 ## Rozdělení práce na projektu 
 ### Hrbáček
