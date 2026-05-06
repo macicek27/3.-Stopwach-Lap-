@@ -108,7 +108,7 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 * **Změna zobrazení (8 ms):** Vstupní data se skokově změní na hodnotu `987650`. Ovladač na signálu `an` plynule pokračuje v rotaci bez přerušení, ale na výstupu `seg` okamžitě začne generovat nové kódy odpovídající tomuto novému času.
 
 ### Programy od doc. Ing. Tomáš Frýza, Ph.D. 
-* Zpracování tlačítek zajišťuje modul [Edge Detector]https://github.com/tomas-fryza/vhdl-examples/tree/master/examples/_solutions
+[Programy k nalezení ]https://github.com/tomas-fryza/vhdl-examples/tree/master/examples/_solutions
 * **debounce** (Odrušení tlačítek)
 * **clk_en** (Generátor hodinového povolení)
 * **counter** (Hlavní čítač)
