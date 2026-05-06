@@ -49,7 +49,7 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 
 ## Dokumentace modulů stopek (Stopwatch)
 
-### **[Stopwach_top](tb_Stopwach_top.vhd)** (Hlavní modul stopek)
+### **[Stopwach_top](Stopwach_top/Stopwach_top.srcs/sim_1/new/tb_Stopwach_top.vhd)** (Hlavní modul stopek)
 
 ![Simulace Top Modulu](tb_Stopwatch.png)
 
@@ -61,7 +61,7 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 * **180 – 200 ms (`btnl`):** Opětovné stisknutí tlačítka a návrat zobrazení zpět na aktuální běžící čas.
 
 
-### **[Start_Stop](Stopwach_top/Stopwach_top.srcs/sim_1/new/tb_Stopwach_top.vhd)** (Klopný obvod chodu)
+### **[Start_Stop](tb_start_stop.vhd)** (Klopný obvod chodu)
 ![Simulace modulu Start_Stop](tb_Start_Stop.png)
 
 * **0 – 25 ns (`rst`):** Na začátku je aktivní reset, který modul bezpečně inicializuje do vypnutého stavu. Povolovací pulzy na vstupu `ce` (např. ve 40 ns) se na výstup `en` nedostanou.
