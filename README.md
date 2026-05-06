@@ -70,7 +70,7 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 * **Kolem 205 ns (STOP):** Přichází druhý stisk tlačítka `btn_in`. Obvod se překlápí zpět do stavu "zastaveno".
 * **Od 210 ns dále (Zastavené stopky):** Výstup `en` trvale zůstává na logické `0`. Přestože vstupní signál `ce` nadále pravidelně pulzuje modul tyto pulzy blokuje, čímž zastaví čítání stopek.
 
-### **[lap](lap.vhd)** (Paměť mezičasu)
+### **[lap](tb_lap.vhd)** (Paměť mezičasu)
 ![Simulace lap Modulu](tb_lap.png)
 * **0 – 20 ns (`rst`):** Na začátku je aktivní signál `rst`, který paměť resetuje.
 * **Zápis do paměti (`lap_sv`):** * Kolem času **50 ns** je na vstupu `lap_in` hodnota `00032` (dekadicky 50). Přichází první pulz `lap_sv` a hodnota se ukládá. Výstup `lap_out` rovnou ukazuje tento první uložený čas. V čase **110 ns** a **170 ns** se na vstup přivádí další časy (`00096` a `0012c`)
