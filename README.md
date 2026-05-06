@@ -49,7 +49,7 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 
 ## Dokumentace modulů stopek (Stopwatch)
 
-### **[Stopwach_top](Stopwach_top.vhd)** (Hlavní modul stopek)
+### **[Stopwach_top](tb_Stopwach_top.vhd)** (Hlavní modul stopek)
 
 ![Simulace Top Modulu](tb_Stopwatch.png)
 
