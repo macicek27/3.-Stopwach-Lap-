@@ -244,5 +244,7 @@ begin
     
     -- Desetinnou tečka
     dp <= '0' when sig_an_5_0(2) = '0' else '1'; 
+    -- Desetinná tečka mezi minutami a sekundamy a sekundamy a setinamy dp <= '0' when (sig_an_5_0(4) = '0' or sig_an_5_0(2) = '0') else '1';
+        
 
 end Behavioral;
