@@ -45,8 +45,6 @@ Systém je rozdělen do několika logických bloků, které spolu komunikují uv
 | **`sig_lap_out`** | 19-bit `[18:0]` | Čas načtený z paměti mezičasů. |
 | **`sig_view_out`** | 19-bit `[18:0]` | Vybraný čas jdoucí do dekodéru. |
 | **`sig_data`** | 24-bit `[23:0]` | Dekódovaný čas připravený pro displej. |
-| **`sig_an_5_0`** | 6-bit `[5:0]` | Pomocný signál pro řízení aktivace spodních 6 číslic. |
-
 ---
 
 ## Dokumentace modulů stopek (Stopwatch)
